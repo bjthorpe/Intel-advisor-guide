@@ -1,0 +1,25 @@
+sep=,
+Name,Bandwidth,Type
+DRAM Bandwidth (single node),0,memory
+DRAM Bandwidth,0,memory
+DRAM Bandwidth (single-threaded),14099486481,memory
+L1 Bandwidth,18189586312560,memory
+Scalar L1 Bandwidth,2480243885560,memory
+L1 bandwidth (single-threaded),454739657814,memory
+Scalar L1 bandwidth (single-threaded),62006097139,memory
+L2 Bandwidth,8529528278240,memory
+Scalar L2 Bandwidth,1029433847320,memory
+L2 bandwidth (single-threaded),213238206956,memory
+Scalar L2 bandwidth (single-threaded),25735846183,memory
+L3 Bandwidth,1073218831280,memory
+Scalar L3 Bandwidth,894862179080,memory
+L3 bandwidth (single-threaded),26830470782,memory
+Scalar L3 bandwidth (single-threaded),22371554477,memory
+SP Vector FMA Peak (single-threaded),197166971707,compute
+DP Vector FMA Peak (single-threaded),98605464754,compute
+Scalar Add Peak (single-threaded),6951059199,compute
+SP Vector Add Peak (single-threaded),104884605609,compute
+DP Vector Add Peak (single-threaded),52482921846,compute
+Integer Scalar Add Peak (single-threaded),8394892281,compute
+Int64 Vector Add Peak (single-threaded),54021711668,compute
+Int32 Vector Add Peak (single-threaded),108163046593,compute
