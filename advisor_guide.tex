@@ -84,7 +84,7 @@ We can also add the tripcounts data to the report using
 advixe-cl --report=tripcounts --format=csv --report-output ./report.csv
 \end{verbatim}
 
-\paragraph{Notes about using MPI} When using the \verb+--collect+ with non-intel mpi we need to use the aditional option \verb+--trace-mpi+. From here both Intel and non-Intel mpi can be called as:
+\paragraph{Notes about using MPI} When using the \verb+--collect+ option with non-intel mpi we need to use the additional option \verb+--trace-mpi+. From here both Intel and non-Intel mpi can be called as:
  \begin{verbatim}
 <mpilauncher> [options] advixe-cl [options] \
 -- <application> [arguments] 
@@ -92,9 +92,11 @@ advixe-cl --report=tripcounts --format=csv --report-output ./report.csv
 
 You do not need to specify an output directory since this will create a directory for each rank called rank.n. you can then view the data using the GUI as before. You can also extract results using \verb+--report+. By default you get data for all the ranks. However, you can get results for a specific rank using the option \verb+--mpi-rank=n+. 
 
-Intel mpi also has the option \verb+-gtool+ this allows you to profile on only select ranks, amongst other things. Details for it's usage can be found here: 
+Intel mpi also has the option \verb+-gtool+ this allows you to profile on only select ranks, amongst other things. However, there does not at this stage appear to be an equivalent way of achieving this functionality using other mpi libraries. Details for it's usage can be found here: 
 
 \url{https://software.intel.com/content/www/us/en/develop/articles/using-intel-advisor-and-vtune-amplifier-with-mpi.html}
+
+
 
 \section{Roofline Analysis}
 To perform a roofline analysis one simply needs to run a survey followed by tripcounts analysis. However, we need to add a new option \verb+--flop+ to the tripcounts collection to tell advisor to collect information on flops for each loop and function.
