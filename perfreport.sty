@@ -1,0 +1,187 @@
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{bbm, bbold}
+\RequirePackage{subfig}
+\RequirePackage{float}
+\RequirePackage{algorithm}
+\RequirePackage{setspace}
+\RequirePackage{bm}
+\RequirePackage{enumitem}
+\RequirePackage{comment}
+
+\RequirePackage{graphicx}
+\RequirePackage{subfiles}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage[english]{babel}
+\RequirePackage{blindtext}
+%\RequirePackage[T1]{fontenc}
+%\RequirePackage{microtype}
+\RequirePackage{caption}
+\RequirePackage{array}
+\RequirePackage{color}
+%\RequirePackage{pst-grad}
+%\RequirePackage{pst-fill}
+%\RequirePackage{pst-tree}
+
+\RequirePackage{algorithmicx}
+\RequirePackage{algpseudocode}% http://ctan.org/pkg/algorithmicx
+\RequirePackage{tcolorbox}
+
+\RequirePackage[margin=20mm,top=30mm,headheight=33pt]{geometry}
+\RequirePackage{adjustbox}
+\RequirePackage{fontspec}
+\RequirePackage{xcolor}
+\RequirePackage{titlesec}
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
+\RequirePackage{unicode-math}
+\RequirePackage{environ}
+\RequirePackage{tabularx}
+\RequirePackage[yyyymmdd]{datetime}
+
+\title{Performance Report}
+\author{}
+\date{}
+
+\DeclareOption{nonperf}{
+  \title{Software Audit Report}
+}
+
+\ProcessOptions\relax
+
+\newcommand\rse[1]{\def\therse{#1}}
+\newcommand\projectowner[1]{\def\theprojectowner{#1}}
+\newcommand\projectid[1]{\def\theprojectid{#1}}
+\newcommand\projectname[1]{\def\theprojectname{#1}}
+\newcommand\softwarename[1]{\def\thesoftwarename{#1}}
+
+\newif\if@multirse\@multirsefalse
+\newcommand\multirse{\multirsetrue}
+
+\definecolor{swanseablue}{HTML}{233264}
+
+\fontspec[Path=fonts/,Extension=.otf]{Cosmos-Medium}
+\setmainfont[Path=fonts/,Extension=.otf,ItalicFont=Futura-Oblique,BoldFont=Futura-Heavy,ItalicFeatures={FakeSlant},Scale=1.2]{Futura}
+\setmonofont[Path=fonts/,Extension=.otf,Scale=1.2]{cmuntt}
+
+\setmathfont[Path=fonts/,Extension=.otf]{FiraMath-Regular.otf}
+\setmathfont[Path=fonts/,Extension=.otf]{Futura.otf}[range=up/{latin,Latin,num}]
+\setmathfont[Path=fonts/,Extension=.otf]{Futura.otf}[range=it/{latin,Latin}]
+\setmathfont[Path=fonts/,Extension=.otf]{Futura-Heavy}[range=bfup/{latin,Latin}]
+\setmathfont[Path=fonts/,Extension=.otf]{Futura-HeavyOblique}[range=bfit/{latin,Latin}]
+
+\titleformat{\section}{\LARGE\fontspec[Path=fonts/,Extension=.otf]{Cosmos-Medium}\bfseries\color{swanseablue}}{\thesection}{1em}{}
+\titlespacing{\section}{0pt}{6pt}{-6pt}
+\titleformat{\subsection}{\Large\fontspec[Path=fonts/,Extension=.otf]{Cosmos-medium}\bfseries\color{swanseablue}}{\thesection}{1em}{}
+\titlespacing{\subsection}{0pt}{6pt}{-6pt}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{12pt}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\includegraphics[height=1cm]{logos/sa2c}}
+\rhead{\theprojectid: \thesoftwarename}
+\lfoot{\today}
+\rfoot{\thepage\ of \pageref{LastPage}}
+
+
+\renewcommand{\dateseparator}{--}
+
+
+\renewcommand\maketitle{
+  \thispagestyle{empty}
+  \begin{center}
+    \includegraphics[height=3.5cm]{logos/sa2c}
+
+    Swansea Academy of Advanced Computing\par
+    Academi Uwch Gyfrifiadureg Abertawe 
+
+    \vfill
+
+    \makeatletter
+    {\fontspec[Path=fonts/,Extension=.otf]{Cosmos-Medium} \Huge \bfseries \textcolor{swanseablue}{\@title}}
+    \makeatother
+  \end{center}
+
+  \vfill
+
+  \let\defaultarraystretch\arraystretch
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{rl}
+    \textbf{Project name:} & \theprojectname\\
+    \textbf{Project id:} & \theprojectid\\
+    \textbf{Project owner:} & \theprojectowner\\
+    \textbf{Software name:} & \thesoftwarename\\
+    \textbf{SA2C RSE\if@multirse{s}\fi:} & \therse\\
+    \textbf{Document date:} & \today
+  \end{tabular}
+  \let\arraystretch\defaultarraystretch
+
+  \vfill
+
+  \begin{centering}
+    A report prepared by the Swansea Academy of Advanced Computing
+    with support from the Supercomputing Wales programme of
+    investment, part-funded by the European Regional Development Fund
+    through Welsh Government.
+  \end{centering}
+
+  \vfill
+
+  \includegraphics[height=3.5cm]{logos/scw}
+  \hfill
+  \includegraphics[height=3.5cm]{logos/swansea}
+  \hfill
+  \includegraphics[height=3.5cm]{logos/erdf}
+
+  \clearpage
+}
+
+\NewEnviron{testdetails}{
+  \let\defaultarraystretch\arraystretch
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabularx}{\columnwidth}{rX}
+    \BODY
+  \end{tabularx}
+  \let\arraystretch\defaultarraystretch
+}
+
+\newcommand\testdetail[2]{\textbf{#1} & #2 \\}
+
+
+\define@key{codelisting}{fontsize}{\def\localfontsize{#1}}
+\define@key{codelisting}{language}{\def\locallanguage{#1}}
+\define@key{codelisting}{caption}{\def\localcaption{#1}}
+\setkeys{codelisting}{fontsize=10, caption=\@empty, language=\@empty}
+
+
+\tcbuselibrary{listings}
+\newenvironment{codelisting}[1][]{
+  \begingroup
+  \setkeys{codelisting}{#1}
+  \let\oldfontsize\f@size
+  \fontsize{\localfontsize}{\localfontsize}\selectfont
+  \center
+  \tcblisting{
+    width=0.9\linewidth,
+    listing only,
+    listing remove caption=false,
+    listing options={
+      caption=\localcaption,
+      basicstyle=\ttfamily,
+      language=\locallanguage,
+      keywordstyle=\color{blue}
+    }}
+}{
+  \endtcblisting
+  \endcenter
+  \fontsize{\oldfontsize}{\oldfontsize}\selectfont
+  \endgroup
+}
+
+
+\endinput
